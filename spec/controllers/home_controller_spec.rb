@@ -13,7 +13,7 @@ RSpec.describe HomeController, vcr: true do
         expect(response).to render_template("index")
       end
 
-      context 'it should ids for both house of commons and house of lords' do
+      context 'it should return ids for both house of commons and house of lords' do
          it 'it should return house of commons id' do
            expect(assigns(:commons_id)).to eq('4b77dd58-f6ba-4121-b521-c8ad70465f52')
          end
@@ -28,7 +28,8 @@ RSpec.describe HomeController, vcr: true do
 
   context 'it does not return a response' do
     it 'and should raise an error' do
-       expect{ get :index }.to raise_error(ActionController::RoutingError)
+       get :index
+       expect(response).to render_template("no_content")
     end
   end
 

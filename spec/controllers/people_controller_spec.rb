@@ -401,9 +401,9 @@ RSpec.describe PeopleController, vcr: true do
     end
   end
 
-  describe 'rescue_from Parliament::NoContentError' do
-    it 'raises an ActionController::RoutingError' do
-      expect{ get :show, params: { person_id: 'a11425ca-6a47-4170-80b9-d6e9f3800a52' } }.to raise_error(ActionController::RoutingError)
-    end
-  end
+  # describe 'rescue_from Parliament::NoContentError' do
+  #   it 'raises an ActionController::RoutingError' do
+  #     expect{ get :show, params: { person_id: 'a11425ca-6a47-4170-80b9-d6e9f3800a52' } }.to raise_error(ActionController::RoutingError)
+  #   end
+  # end
 end
