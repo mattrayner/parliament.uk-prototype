@@ -33,6 +33,11 @@ RSpec.describe PostcodesController, vcr: true do
       it 'renders the show template' do
         expect(response).to render_template('show')
       end
+
+      it 'sets session values as expected' do
+        expect(session['postcode']).to eq('SW1A 2AA')
+        expect(session['postcode_constituency_id']).to eq('SNz83iQG')
+      end
     end
 
     context 'given an invalid postcode, but in the correct postcode format' do

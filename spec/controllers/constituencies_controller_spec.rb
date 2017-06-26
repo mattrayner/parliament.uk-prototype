@@ -85,6 +85,27 @@ RSpec.describe ConstituenciesController, vcr: true do
       expect(response).to render_template('show')
     end
 
+    context 'with session values set' do
+      context 'with a matching postcode' do
+        before :each do
+          session['postcode'] = 'E2 0JA'
+          session['postcode_constituency_id'] = 'vUPobpVT'
+
+          get :show, params: { constituency_id: 'vUPobpVT' }
+        end
+
+        after :each do
+          session['postcode'] = nil
+          session['postcode_constituency_id'] = nil
+        end
+
+        it 'assigns @postcode, @postcode_constituency_id' do
+          expect(assigns(:postcode)).to eq('E2 0JA')
+          expect(assigns(:postcode_constituency_id)).to eq('vUPobpVT')
+        end
+      end
+    end
+
     context 'given a valid postcode' do
       before(:each) do
         get :show, params: { constituency_id: 'vUPobpVT' }, flash: { postcode: 'E2 0JA' }

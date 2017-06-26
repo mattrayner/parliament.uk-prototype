@@ -1,8 +1,8 @@
 worker_count = ENV['WEB_CONCURRENCY']
-worker_count ||= Rails.env.development? ? 1 : 2
+worker_count ||= Rails.env.development? ? 2 : 2
 
 thread_count = ENV['RAILS_MAX_THREADS']
-thread_count ||= Rails.env.development? ? 1 : 5
+thread_count ||= Rails.env.development? ? 5 : 5
 
 workers Integer(worker_count)
 threads Integer(thread_count), Integer(thread_count)

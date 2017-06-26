@@ -32,7 +32,8 @@ class ConstituenciesController < ApplicationController
 
   def show
     constituency_id = params[:constituency_id]
-    @postcode = flash[:postcode]
+    @postcode = flash[:postcode] || session[:postcode]
+    @postcode_constituency_id = session[:postcode_constituency_id]
 
     @constituency, @seat_incumbencies = RequestHelper.filter_response_data(
       parliament_request.constituencies(constituency_id),
@@ -46,7 +47,7 @@ class ConstituenciesController < ApplicationController
 
     @current_incumbency = @seat_incumbencies.shift if !@seat_incumbencies.empty? && @seat_incumbencies.first.current?
 
-    return if @postcode.nil?
+    return if @postcode.nil? || @postcode_constituency_id.present?
 
     begin
       response = PostcodeHelper.lookup(@postcode)

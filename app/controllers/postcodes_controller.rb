@@ -11,6 +11,9 @@ class PostcodesController < ApplicationController
       response = PostcodeHelper.lookup(@postcode)
 
       @constituency = response.filter('http://id.ukpds.org/schema/ConstituencyGroup').first
+
+      session['postcode'] = @postcode
+      session['postcode_constituency_id'] = @constituency.graph_id
     rescue PostcodeHelper::PostcodeError => error
       flash[:error] = error.message
       flash[:postcode] = @postcode
